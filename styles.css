@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: #272727;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navMenu {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+  margin-left: 500px; /* Adicionado */
+}
+
+.navMenu a {
+  color: #f6f4e6;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  padding: 3px;
+}
+
+.navMenu a:hover {
+  color: #0047b3;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.imgprofile {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 500px;
+  background: url("/img/profilebeach.jpg") center center no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  z-index: -1;
+}
+
+.about-me {
+  max-width: 800px;
+  padding: 20px;
+  color: #F0F8FF;
+  text-align: justify;
+  line-height: 1.5;
+  margin-left: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-me p {
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .navMenu {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .imgprofile {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+  }
+
+  .about-me {
+    width: 100%;
+    margin-left: 0;
+  }
+}
