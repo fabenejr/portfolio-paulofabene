@@ -1,29 +1,34 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   padding: 0;
-  border: none;
-  background: #272727;
+  background: #f0f0f0;
   font-family: "Montserrat", sans-serif;
+}
+
+header {
+  background: #1c1c1c;
 }
 
 .navMenu {
   display: flex;
   justify-content: center;
   padding: 20px;
-  gap: 20px;
-  margin-left: 500px; /* Adicionado */
+  gap: 10px;
+  background-color: rgba(28, 28, 28, 0.8);
 }
 
 .navMenu a {
   color: #f6f4e6;
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   text-transform: uppercase;
   font-weight: 500;
   transition: all 0.2s ease-in-out;
-  padding: 3px;
+  padding: 3px 10px;
 }
 
 .navMenu a:hover {
@@ -32,63 +37,119 @@ body {
 
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
-  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 100px;
 }
 
 .imgprofile {
   position: fixed;
   left: 0;
   top: 0;
+  width: 400px;
+  max-width: 100%;
   height: 100%;
-  width: 500px;
-  background: url("/img/profilebeach.jpg") center center no-repeat;
+  background: url('img/profilebeach.jpg') center;
   background-size: cover;
-  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
   z-index: -1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+
 .about-me {
+  flex: 1 1 60%;
   max-width: 800px;
   padding: 20px;
-  color: #F0F8FF;
+  color: #333;
   text-align: justify;
   line-height: 1.5;
-  margin-left: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+.about-me h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .about-me p {
-  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.social {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.social a,
+.social span {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  color: #333;
+  font-size: 1.2rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.social a:hover {
+  color: #0047b3;
+}
+
+footer {
+  background-color: #1c1c1c;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.tech-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tech-icons i {
+  color: #f6f4e6;
+  font-size: 2rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.tech-icons i:hover {
+  color: #0047b3;
 }
 
 @media only screen and (max-width: 768px) {
-  .navMenu {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+  .container {
+    padding-top: 100px;
+    padding-bottom: 80px;
   }
 
-  .container {
-    flex-direction: column;
-    align-items: center;
+  .imgprofile {
+    position: static;
+    width: 100%;
+    height: auto;
+    filter: none;
+  }
+
+  .about-me {
+    margin: 20px 0;
+    max-width: 100%;
+  }
+
+  .social {
+    width: 100%;
     justify-content: center;
     margin-top: 20px;
   }
 
-  .imgprofile {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    margin-bottom: 20px;
-  }
-
-  .about-me {
-    width: 100%;
-    margin-left: 0;
+  .social a,
+  .social span {
+    margin: 5px;
   }
 }
