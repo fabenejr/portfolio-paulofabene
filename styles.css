@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: #f0f0f0;
+  background: #f5ff5;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -17,16 +17,16 @@ header {
   display: flex;
   justify-content: center;
   padding: 20px;
-  gap: 10px;
+  gap: 20px;
   background-color: rgba(28, 28, 28, 0.8);
 }
 
 .navMenu a {
   color: #f6f4e6;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.2s ease-in-out;
   padding: 3px 10px;
 }
@@ -44,6 +44,30 @@ header {
   margin: 0 auto;
   padding: 80px 20px 100px;
 }
+button.languageBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1c1c1c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button.languageBtn:hover {
+  background-color: #1c1c1c;
+}
+
+button.languageBtn:active {
+  background-color: #cccccc;
+}
+
+.languageContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
 .imgprofile {
   position: fixed;
@@ -58,7 +82,6 @@ header {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-
 .about-me {
   flex: 1 1 60%;
   max-width: 800px;
@@ -66,6 +89,9 @@ header {
   color: #333;
   text-align: justify;
   line-height: 1.5;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .about-me h1 {
@@ -85,7 +111,8 @@ header {
   flex-wrap: wrap;
 }
 
-.social a {
+.social a,
+.social span {
   display: flex;
   align-items: center;
   margin: 0 10px;
@@ -95,46 +122,77 @@ header {
   transition: all 0.2s ease-in-out;
   text-decoration: none;
 }
-.social span {
-  display: flex;
-  align-items: center;
-  margin: 0 10px;
-  color: #333;
-  font-size: 1.2rem;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
-}
 
-.social a:hover {
+.social a:hover,
+.social span:hover {
   color: #0047b3;
+  transform: translateY(-3px);
 }
 
 footer {
-  background-color: #1c1c1c;
+  background-color: #333;
   padding: 20px;
   position: fixed;
-  bottom: 0;
+ bottom: 0;
   left: 0;
   width: 100%;
+  color: #f6f4e6;
 }
 
 .tech-icons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  font-size: 1.8rem;
+  gap: 15px;
 }
 
 .tech-icons i {
-  color: #f6f4e6;
+  color: #6c757d;
   font-size: 2rem;
   transition: all 0.2s ease-in-out;
 }
 
+/* .tech-icons i:hover {
+  color: #0047b3;
+} */
+
+.tech-icons .fab.fa-js-square {
+  color: #f0db4f;
+}
+
+.tech-icons .fab.fa-node {
+  color: #68a063;
+}
+
+.tech-icons .fab.fa-react {
+  color: #61dbfb;
+}
+
+.tech-icons .fab.fa-html5 {
+ color: #e34c26;
+}
+
+.tech-icons .fab.fa-css3-alt {
+  color: #264de4;
+}
+.tech-icons  .fa-reacteurope {
+  color: #61dbfb;
+}
+
+.tech-icons  .fa-docker {
+  color: #2496ed;
+}
+
+.tech-icons  .fa-database {
+  color: #FF8C00;
+}
+
 
 @media only screen and (max-width: 768px) {
-  .container {
+ .container {
     padding-top: 100px;
     padding-bottom: 80px;
+    transition: padding 0.2s ease-in-out;
   }
 
   .imgprofile {
@@ -152,11 +210,46 @@ footer {
   .social {
     width: 100%;
     justify-content: center;
-    margin-top: 20px;
+ margin-top: 20px;
   }
 
   .social a,
   .social span {
     margin: 5px;
+    font-size: 1.1rem;
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
   }
+
+  .technologies {
+    flex: 1 1 60%;
+    max-width: 800px;
+    padding: 20px;
+    color: #333;
+    text-align: justify;
+    line-height: 1.5;
+  }
+
+  .technologies h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .technologies .tech-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .technologies .tech-icons i {
+    
+    font-size: 2rem;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .technologies .tech-icons i:hover {
+    color: #0047b3;
+  }
+  
 }
