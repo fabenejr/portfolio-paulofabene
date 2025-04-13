@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/',  // Alterando para root path
+  base: '/fabenejr.github.io/'  // Corrigindo o caminho base para o GitHub Pages
 })
