@@ -1,0 +1,40 @@
+{
+  "header": {
+    "role": "Analista e Desenvolvedor de Sistemas | Soluções AWS",
+    "location": "Londrina, Brasil"
+  },
+  "nav": {
+    "about": "Sobre",
+    "contact": "Contato",
+    "projects": "Projetos"
+  },
+  "about": {
+    "title": "Sobre mim",
+    "description": "Analista e Desenvolvedor de Sistemas certificado, formado em 2020, com foco em criar soluções inovadoras usando chatbots, arquiteturas serverless, Node.js e AWS Lambda. Minha experiência inclui não só o desenvolvimento técnico, mas também o atendimento e suporte ao cliente, além da implantação e consultoria de sistemas.",
+    "passion": "Fora do trabalho, me dedico à família e gosto de relaxar jogando. Estou sempre buscando crescer, seja através da leitura ou do aprimoramento de habilidades técnicas em Docker, Kubernetes e AWS, além de trabalhar constantemente para melhorar minha fluência em inglês. Sempre aberto para conexões e discussões que promovam o crescimento mútuo e a inovação."
+  },
+  "skills": {
+    "title": "Habilidades & Tecnologias",
+    "frontend": "Desenvolvimento Frontend",
+    "backend": "Desenvolvimento Backend",
+    "tools": "Ferramentas & Plataformas"
+  },
+  "contact": {
+    "title": "Entre em contato",
+    "description": "Tem alguma pergunta ou quer trabalhar junto? Não hesite em me contatar!",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Mensagem",
+    "submit": "Enviar Mensagem"
+  },
+  "theme": {
+    "toggle": "Alternar tema",
+    "dark": "Modo escuro",
+    "light": "Modo claro"
+  },
+  "language": {
+    "select": "Selecionar idioma",
+    "en": "Inglês",
+    "pt": "Português"
+  }
+}

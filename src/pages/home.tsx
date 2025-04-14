@@ -1,0 +1,200 @@
+import { useTranslation } from "react-i18next"
+import { motion } from "framer-motion"
+import { Card } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import {
+  SiReact,
+  SiTypescript,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiPrisma,
+  SiMongodb,
+  SiPostgresql,
+  SiGit,
+  SiDocker,
+  SiAmazon,
+  SiKubernetes,
+  SiServerless,
+  SiJavascript
+} from "react-icons/si"
+import { FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6"
+import profileImage from '@/assets/images/profilebeach.jpg'
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+}
+
+const TechItem = ({ icon: Icon, label, color }: { icon: any; label: string; color: string }) => (
+  <motion.div
+    variants={item}
+    className={`flex items-center gap-2 ${color} px-3 py-1.5 rounded-md bg-background/50 backdrop-blur-sm border tech-item`}
+  >
+    <Icon className="w-4 h-4" />
+    <span className="text-sm font-medium">{label}</span>
+  </motion.div>
+)
+
+const SocialLink = ({ href, icon: Icon }: { href: string; icon: any }) => (
+  <motion.a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    <Button variant="ghost" size="icon">
+      <Icon className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+    </Button>
+  </motion.a>
+)
+
+export function HomePage() {
+  const { t } = useTranslation()
+
+  return (
+    <motion.div 
+      className="space-y-6"
+      variants={container}
+      initial="hidden"
+      animate="show"
+      exit={{ opacity: 0, y: 20 }}
+    >
+      <motion.div variants={item}>
+        <Card className="bg-background/80 backdrop-blur-sm border shadow-lg">
+          <div className="p-6 flex flex-col md:flex-row gap-6">
+            <div className="flex-shrink-0">
+              <motion.div 
+                className="relative rounded-full overflow-hidden shadow-xl"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-background">
+                  <AvatarImage 
+                    src={profileImage}
+                    alt="Paulo Fabene"
+                    className="object-cover"
+                    style={{ 
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <AvatarFallback>PF</AvatarFallback>
+                </Avatar>
+              </motion.div>
+            </div>
+            
+            <div className="flex-grow space-y-4">
+              <div>
+                <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
+                  Paulo Fabene
+                </h1>
+                <p className="text-muted-foreground">{t('header.role')}</p>
+                <p className="text-muted-foreground">{t('header.location')}</p>
+              </div>
+
+              <motion.div 
+                className="flex flex-wrap gap-2"
+                variants={container}
+                initial="hidden"
+                animate="show"
+              >
+                <TechItem icon={SiReact} label="React" color="text-sky-500" />
+                <TechItem icon={SiTypescript} label="TypeScript" color="text-blue-500" />
+                <TechItem icon={SiNextdotjs} label="Next.js" color="text-foreground" />
+                <TechItem icon={SiTailwindcss} label="Tailwind" color="text-teal-500" />
+                <TechItem icon={SiNodedotjs} label="Node.js" color="text-green-500" />
+                <TechItem icon={SiPrisma} label="Prisma" color="text-indigo-500" />
+              </motion.div>
+
+              <div className="flex gap-2">
+                <SocialLink 
+                  href="https://www.linkedin.com/in/paulofabene/"
+                  icon={FaLinkedin}
+                />
+                <SocialLink 
+                  href="https://github.com/fabenejr"
+                  icon={FaGithub}
+                />
+                <SocialLink 
+                  href="https://twitter.com/fabenejr"
+                  icon={FaXTwitter}
+                />
+              </div>
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <motion.div variants={item}>
+          <Card className="bg-card h-full">
+            <div className="p-6">
+              <h2 className="text-xl font-semibold mb-4">{t('about.title')}</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>{t('about.description')}</p>
+                <p>{t('about.passion')}</p>
+              </div>
+            </div>
+          </Card>
+        </motion.div>
+
+        <motion.div variants={item}>
+          <Card className="bg-card h-full">
+            <div className="p-6">
+              <h2 className="text-xl font-semibold mb-4">{t('skills.title')}</h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-medium text-sm text-muted-foreground mb-3">{t('skills.frontend')}</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    <TechItem icon={SiReact} label="React" color="text-sky-500" />
+                    <TechItem icon={SiNextdotjs} label="Next.js" color="text-foreground" />
+                    <TechItem icon={SiTypescript} label="TypeScript" color="text-blue-500" />
+                    <TechItem icon={SiTailwindcss} label="Tailwind" color="text-teal-500" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-medium text-sm text-muted-foreground mb-3">{t('skills.backend')}</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    <TechItem icon={SiNodedotjs} label="Node.js" color="text-green-500" />
+                    <TechItem icon={SiAmazon} label="AWS" color="text-orange-500" />
+                    <TechItem icon={SiServerless} label="Serverless" color="text-red-500" />
+                    <TechItem icon={SiJavascript} label="JavaScript" color="text-yellow-500" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-medium text-sm text-muted-foreground mb-3">{t('skills.tools')}</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    <TechItem icon={SiDocker} label="Docker" color="text-blue-500" />
+                    <TechItem icon={SiKubernetes} label="Kubernetes" color="text-blue-600" />
+                    <TechItem icon={SiGit} label="Git" color="text-orange-600" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-medium text-sm text-muted-foreground mb-3">Database</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    <TechItem icon={SiMongodb} label="MongoDB" color="text-green-600" />
+                    <TechItem icon={SiPostgresql} label="PostgreSQL" color="text-blue-400" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </motion.div>
+      </div>
+    </motion.div>
+  )
+}
