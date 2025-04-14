@@ -1,0 +1,40 @@
+{
+  "header": {
+    "role": "Developer | Tech Lead Projets",
+    "location": "Londrina, Brazil"
+  },
+  "nav": {
+    "about": "About",
+    "contact": "Contact",
+    "projects": "Projects"
+  },
+  "about": {
+    "title": "About me",
+    "description": "Bachelor's degree in Systems Analysis and Development, focused on frontend development. With solid experience in customer support and technical solutions in the SaaS industry.",
+    "passion": "Passionate about technology, development, and gaming. Always learning and exploring new technologies to create better user experiences."
+  },
+  "skills": {
+    "title": "Skills & Technologies",
+    "frontend": "Frontend Development",
+    "backend": "Backend Development",
+    "tools": "Tools & Platforms"
+  },
+  "contact": {
+    "title": "Get in touch",
+    "description": "Have a question or want to work together? Feel free to reach out!",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Send Message"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "dark": "Dark mode",
+    "light": "Light mode"
+  },
+  "language": {
+    "select": "Select language",
+    "en": "English",
+    "pt": "Portuguese"
+  }
+}

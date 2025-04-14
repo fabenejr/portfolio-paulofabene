@@ -1,0 +1,40 @@
+{
+  "header": {
+    "role": "Desenvolvedor | Lider Técnico de Projetos",
+    "location": "Londrina, Brasil"
+  },
+  "nav": {
+    "about": "Sobre",
+    "contact": "Contato",
+    "projects": "Projetos"
+  },
+  "about": {
+    "title": "Sobre mim",
+    "description": "Formado em Análise e Desenvolvimento de Sistemas, com foco em desenvolvimento frontend. Com sólida experiência em suporte ao cliente e soluções técnicas na indústria SaaS.",
+    "passion": "Apaixonado por tecnologia, desenvolvimento e games. Sempre aprendendo e explorando novas tecnologias para criar melhores experiências de usuário."
+  },
+  "skills": {
+    "title": "Habilidades & Tecnologias",
+    "frontend": "Desenvolvimento Frontend",
+    "backend": "Desenvolvimento Backend",
+    "tools": "Ferramentas & Plataformas"
+  },
+  "contact": {
+    "title": "Entre em contato",
+    "description": "Tem alguma pergunta ou quer trabalhar junto? Não hesite em me contatar!",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Mensagem",
+    "submit": "Enviar Mensagem"
+  },
+  "theme": {
+    "toggle": "Alternar tema",
+    "dark": "Modo escuro",
+    "light": "Modo claro"
+  },
+  "language": {
+    "select": "Selecionar idioma",
+    "en": "Inglês",
+    "pt": "Português"
+  }
+}
