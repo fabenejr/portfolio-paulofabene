@@ -9,7 +9,7 @@ import "./lib/i18n";
 export default function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="portfolio-theme" enableSystem>
-      <BrowserRouter basename="/">
+      <BrowserRouter basename="/fabenejr.github.io">
         <Routes>
           <Route path="*" element={<Navigate to="/" />} /> {/* Redirecionamento para Home caso rota não exista */}
           <Route path="/" element={<RootLayout />}> {/* Layout raiz */}
