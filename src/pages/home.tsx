@@ -14,7 +14,14 @@ import {
   SiPostgresql,
   SiGit,
   SiDocker,
+<<<<<<< HEAD
   SiVercel
+=======
+  SiAmazon,
+  SiKubernetes,
+  SiServerless,
+  SiJavascript
+>>>>>>> main
 } from "react-icons/si"
 import { FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6"
 import profileImage from '@/assets/images/profilebeach.jpg'
@@ -37,24 +44,38 @@ const item = {
 const TechItem = ({ icon: Icon, label, color }: { icon: any; label: string; color: string }) => (
   <motion.div
     variants={item}
+<<<<<<< HEAD
     className={`flex items-center gap-2 ${color} px-3 py-1.5 rounded-md bg-background/50 backdrop-blur-sm border`}
+=======
+    className={`flex items-center gap-2 ${color} px-3 py-1.5 rounded-md bg-background/50 backdrop-blur-sm border tech-item`}
+>>>>>>> main
   >
     <Icon className="w-4 h-4" />
     <span className="text-sm font-medium">{label}</span>
   </motion.div>
 )
 
+<<<<<<< HEAD
 const SocialLink = ({ href, icon: Icon, color }: { href: string; icon: any; color: string }) => (
+=======
+const SocialLink = ({ href, icon: Icon }: { href: string; icon: any }) => (
+>>>>>>> main
   <motion.a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.95 }}
+<<<<<<< HEAD
     className={`${color}`}
   >
     <Button variant="ghost" size="icon">
       <Icon className="w-5 h-5" />
+=======
+  >
+    <Button variant="ghost" size="icon">
+      <Icon className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+>>>>>>> main
     </Button>
   </motion.a>
 )
@@ -71,6 +92,7 @@ export function HomePage() {
       exit={{ opacity: 0, y: 20 }}
     >
       <motion.div variants={item}>
+<<<<<<< HEAD
         <Card className="bg-card">
           <div className="p-6 flex flex-col md:flex-row gap-6">
             <div className="flex-shrink-0 relative group">
@@ -95,6 +117,26 @@ export function HomePage() {
                     src={profileImage}
                     alt="Paulo Fabene"
                     className="object-cover scale-110 hover:scale-125 transition-transform duration-700"
+=======
+        <Card className="bg-background/80 backdrop-blur-sm border shadow-lg">
+          <div className="p-6 flex flex-col md:flex-row gap-6">
+            <div className="flex-shrink-0">
+              <motion.div 
+                className="relative rounded-full overflow-hidden shadow-xl"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-background">
+                  <AvatarImage 
+                    src={profileImage}
+                    alt="Paulo Fabene"
+                    className="object-cover"
+                    style={{ 
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+>>>>>>> main
                   />
                   <AvatarFallback>PF</AvatarFallback>
                 </Avatar>
@@ -128,17 +170,26 @@ export function HomePage() {
                 <SocialLink 
                   href="https://www.linkedin.com/in/paulofabene/"
                   icon={FaLinkedin}
+<<<<<<< HEAD
                   color="text-[#0077B5] hover:text-[#0077B5]/80"
+=======
+>>>>>>> main
                 />
                 <SocialLink 
                   href="https://github.com/fabenejr"
                   icon={FaGithub}
+<<<<<<< HEAD
                   color="text-foreground hover:text-foreground/80"
+=======
+>>>>>>> main
                 />
                 <SocialLink 
                   href="https://twitter.com/fabenejr"
                   icon={FaXTwitter}
+<<<<<<< HEAD
                   color="text-foreground hover:text-foreground/80"
+=======
+>>>>>>> main
                 />
               </div>
             </div>
@@ -177,17 +228,36 @@ export function HomePage() {
                   <h3 className="font-medium text-sm text-muted-foreground mb-3">{t('skills.backend')}</h3>
                   <div className="grid grid-cols-2 gap-2">
                     <TechItem icon={SiNodedotjs} label="Node.js" color="text-green-500" />
+<<<<<<< HEAD
                     <TechItem icon={SiPrisma} label="Prisma" color="text-indigo-500" />
                     <TechItem icon={SiMongodb} label="MongoDB" color="text-green-600" />
                     <TechItem icon={SiPostgresql} label="PostgreSQL" color="text-blue-400" />
+=======
+                    <TechItem icon={SiAmazon} label="AWS" color="text-orange-500" />
+                    <TechItem icon={SiServerless} label="Serverless" color="text-red-500" />
+                    <TechItem icon={SiJavascript} label="JavaScript" color="text-yellow-500" />
+>>>>>>> main
                   </div>
                 </div>
                 <div>
                   <h3 className="font-medium text-sm text-muted-foreground mb-3">{t('skills.tools')}</h3>
                   <div className="grid grid-cols-2 gap-2">
+<<<<<<< HEAD
                     <TechItem icon={SiGit} label="Git" color="text-orange-500" />
                     <TechItem icon={SiDocker} label="Docker" color="text-blue-600" />
                     <TechItem icon={SiVercel} label="Vercel" color="text-foreground" />
+=======
+                    <TechItem icon={SiDocker} label="Docker" color="text-blue-500" />
+                    <TechItem icon={SiKubernetes} label="Kubernetes" color="text-blue-600" />
+                    <TechItem icon={SiGit} label="Git" color="text-orange-600" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-medium text-sm text-muted-foreground mb-3">Database</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    <TechItem icon={SiMongodb} label="MongoDB" color="text-green-600" />
+                    <TechItem icon={SiPostgresql} label="PostgreSQL" color="text-blue-400" />
+>>>>>>> main
                   </div>
                 </div>
               </div>

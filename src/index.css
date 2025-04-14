@@ -10,6 +10,7 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
+<<<<<<< HEAD
     --primary: 142.1 76.2% 36.3%;
     --primary-foreground: 355.7 100% 97.3%;
     --secondary: 240 4.8% 95.9%;
@@ -23,10 +24,26 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
+=======
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+>>>>>>> main
     --radius: 0.75rem;
   }
 
   .dark {
+<<<<<<< HEAD
     --background: 20 14.3% 4.1%;
     --foreground: 0 0% 95%;
     --card: 24 9.8% 10%;
@@ -46,6 +63,27 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
+=======
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+>>>>>>> main
   }
 }
 
@@ -67,6 +105,10 @@
 .dark {
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+<<<<<<< HEAD
+=======
+  color-scheme: dark;
+>>>>>>> main
 }
 
 body {
@@ -123,7 +165,11 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+<<<<<<< HEAD
   background-color: #1a1a1a;
+=======
+  /* background-color: #1a1a1a; */
+>>>>>>> main
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -163,13 +209,27 @@ button:focus-visible {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+<<<<<<< HEAD
 /* Improved focus styles */
 :focus-visible {
   @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+=======
+/* Improve theme transitions */
+:root * {
+  transition: background-color 0.2s ease-in-out,
+              border-color 0.2s ease-in-out,
+              color 0.2s ease-in-out;
+}
+
+/* Enhanced focus styles */
+:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+>>>>>>> main
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
+<<<<<<< HEAD
   width: 10px;
 }
 
@@ -204,4 +264,67 @@ button:focus-visible {
 
 .avatar-glow:hover::before {
   opacity: 1;
+=======
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
+}
+
+/* Remove avatar-glow and pulse animations */
+.avatar-glow,
+.avatar-glow::before,
+.avatar-glow,
+.avatar-glow::before {
+  animation: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Reset button styles for specific components */
+.NavigationMenuTrigger,
+.DropdownMenuTrigger {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+/* Card hover effects */
+.card {
+  @apply transition-all duration-300;
+}
+
+.card:hover {
+  @apply shadow-lg dark:shadow-primary/5;
+  transform: translateY(-2px);
+}
+
+/* Tech stack item hover effects */
+.tech-item {
+  @apply transition-all duration-300;
+}
+
+.tech-item:hover {
+  @apply shadow-md;
+  transform: translateY(-1px) scale(1.02);
+>>>>>>> main
 }

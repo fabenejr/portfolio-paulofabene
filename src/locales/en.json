@@ -1,6 +1,10 @@
 {
   "header": {
+<<<<<<< HEAD
     "role": "Developer | Tech Lead Projets",
+=======
+    "role": "Systems Analyst & Developer | AWS Solutions",
+>>>>>>> main
     "location": "Londrina, Brazil"
   },
   "nav": {
@@ -10,8 +14,13 @@
   },
   "about": {
     "title": "About me",
+<<<<<<< HEAD
     "description": "Bachelor's degree in Systems Analysis and Development, focused on frontend development. With solid experience in customer support and technical solutions in the SaaS industry.",
     "passion": "Passionate about technology, development, and gaming. Always learning and exploring new technologies to create better user experiences."
+=======
+    "description": "Certified Systems Analyst and Developer, graduated in 2020, focused on creating innovative solutions using chatbots, serverless architectures, Node.js, and AWS Lambda. My experience encompasses customer support/service, system deployment, and consulting, enabling me to deliver comprehensive, client-focused solutions.",
+    "passion": "Outside of work, I dedicate myself to family and enjoy gaming. I'm constantly growing through reading and enhancing my technical skills in Docker, Kubernetes, and AWS, while actively improving my English proficiency. Always open to connections and discussions that foster mutual growth and innovation."
+>>>>>>> main
   },
   "skills": {
     "title": "Skills & Technologies",

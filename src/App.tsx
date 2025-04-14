@@ -11,10 +11,17 @@ export default function App() {
     <ThemeProvider defaultTheme="system" storageKey="portfolio-theme" enableSystem>
       <BrowserRouter>
         <Routes>
+<<<<<<< HEAD
           <Route element={<RootLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<Navigate to="/" />} />
+=======
+          <Route path="/fabenejr.github.io" element={<RootLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="*" element={<Navigate to="/fabenejr.github.io" />} />
+>>>>>>> main
           </Route>
         </Routes>
       </BrowserRouter>
