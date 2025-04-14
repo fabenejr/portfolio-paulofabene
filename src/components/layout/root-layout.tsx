@@ -38,11 +38,11 @@ export function RootLayout() {
                 <NavigationMenuLink
                   className={cn(
                     "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                    (location.pathname === "/fabenejr.github.io" || location.pathname === "/") && "bg-accent text-accent-foreground"
+                    location.pathname === "/" && "bg-accent text-accent-foreground"
                   )}
                   asChild
                 >
-                  <Link to="/fabenejr.github.io" onClick={() => window.scrollTo(0, 0)}>Paulo Fabene</Link>
+                  <Link to="/" onClick={() => window.scrollTo(0, 0)}>Paulo Fabene</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -53,7 +53,7 @@ export function RootLayout() {
                   )}
                   asChild
                 >
-                  <Link to="/fabenejr.github.io/contact" onClick={() => window.scrollTo(0, 0)}>{t('nav.contact')}</Link>
+                  <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>{t('nav.contact')}</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -66,7 +66,7 @@ export function RootLayout() {
       </motion.header>
       <main className="container py-6 min-h-[calc(100vh-8rem)]">
         <PageTransition>
-          <Outlet />
+          <Outlet key={location.pathname} /> {/* 👈 Isso aqui força o remount */}
         </PageTransition>
       </main>
       <footer className="border-t py-6 md:py-0">
