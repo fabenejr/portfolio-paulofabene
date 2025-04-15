@@ -1,8 +1,11 @@
 import { useTranslation } from "react-i18next"
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { Ripple } from "@/components/magicui/ripple";
+
+import profileImage from '@/assets/images/profilebeach.jpg'
+
 import {
   SiReact,
   SiTypescript,
@@ -20,7 +23,6 @@ import {
   SiJavascript
 } from "react-icons/si"
 import { FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6"
-import profileImage from '@/assets/images/profilebeach.jpg'
 
 const container = {
   hidden: { opacity: 0 },
@@ -72,31 +74,32 @@ export function HomePage() {
       animate="show"
       exit={{ opacity: 0, y: 20 }}
     >
-      <motion.div variants={item}>
-        <Card className="bg-background/80 backdrop-blur-sm border shadow-lg">
-          <div className="p-6 flex flex-col md:flex-row gap-6">
-            <div className="flex-shrink-0">
-              <motion.div 
-                className="relative rounded-full overflow-hidden shadow-xl"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-background">
-                  <AvatarImage 
+        <motion.div variants={item}>
+      <Card className="bg-background/80 backdrop-blur-sm border shadow-lg">
+        <div className="p-6 flex flex-col md:flex-row gap-6 relative">
+          {/* Verifique a visibilidade do ripple aqui */}
+
+          <Ripple className="absolute inset-0 z-10 animate-ripple" />
+
+
+          <div className="flex-shrink-0">
+            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden">
+            
+              <motion.div className="relative z-20 rounded-full overflow-hidden shadow-xl w-full h-full">
+                <picture className="block w-full h-full">
+                  <source srcSet={profileImage} type="image/webp" />
+                  <img
                     src={profileImage}
                     alt="Paulo Fabene"
-                    className="object-cover"
-                    style={{ 
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
+                    className="w-full h-full object-cover rounded-full"
+                    width={400}
+                    height={400}
                   />
-                  <AvatarFallback>PF</AvatarFallback>
-                </Avatar>
+                </picture>
               </motion.div>
+              </div>
             </div>
-            
+
             <div className="flex-grow space-y-4">
               <div>
                 <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
@@ -121,18 +124,9 @@ export function HomePage() {
               </motion.div>
 
               <div className="flex gap-2">
-                <SocialLink 
-                  href="https://www.linkedin.com/in/paulofabene/"
-                  icon={FaLinkedin}
-                />
-                <SocialLink 
-                  href="https://github.com/fabenejr"
-                  icon={FaGithub}
-                />
-                <SocialLink 
-                  href="https://twitter.com/fabenejr"
-                  icon={FaXTwitter}
-                />
+                <SocialLink href="https://www.linkedin.com/in/paulofabene/" icon={FaLinkedin} />
+                <SocialLink href="https://github.com/fabenejr" icon={FaGithub} />
+                <SocialLink href="https://twitter.com/fabenejr" icon={FaXTwitter} />
               </div>
             </div>
           </div>

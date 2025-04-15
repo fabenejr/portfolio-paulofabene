@@ -2,7 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes ripple {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.5;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: ripple var(--duration, 2s) ease-out calc(var(--i, 0) * 0.2s) infinite;
+}
+
+
 @layer base {
+
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -212,6 +233,7 @@ button:focus-visible {
     opacity: 1;
   }
 }
+
 
 /* Reset button styles for specific components */
 .NavigationMenuTrigger,
