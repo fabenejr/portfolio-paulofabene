@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { OptimizedAvatar } from "@/components/ui/avatar"
 
 // import profileImage from '@/assets/images/profilebeach.jpg'
