@@ -2,9 +2,11 @@ import { useTranslation } from "react-i18next"
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { OptimizedAvatar } from "@/components/ui/avatar"
+import { useState, useEffect } from "react"
 
-// import profileImage from '@/assets/images/profilebeach.jpg'
-// Usando a imagem do GitHub para manter atualizado automaticamente
+// Import both image sources
+import profileImage from '@/assets/images/profilebeach.jpg'
+// GitHub profile image as primary source with fallback mechanism
 const githubProfileImage = "https://github.com/fabenejr.png";
 
 import {
@@ -76,6 +78,22 @@ const SocialLink = ({ href, icon: Icon }: { href: string; icon: any }) => (
 
 export function HomePage() {
   const { t } = useTranslation()
+  const [imageSrc, setImageSrc] = useState(githubProfileImage)
+
+  // Image error handling with fallback
+  useEffect(() => {
+    const img = new Image();
+    img.src = githubProfileImage;
+    
+    img.onload = () => {
+      setImageSrc(githubProfileImage);
+    };
+    
+    img.onerror = () => {
+      console.log("GitHub profile image failed to load, using local image");
+      setImageSrc(profileImage);
+    };
+  }, []);
 
   return (
     <motion.div 
@@ -91,7 +109,7 @@ export function HomePage() {
             {/* Integrando o avatar com o ripple diretamente */}
             <div className="relative z-20 mb-2">
               <OptimizedAvatar
-                src={githubProfileImage}
+                src={imageSrc}
                 alt="Paulo Fabene"
                 size="md"
                 className="mx-auto"

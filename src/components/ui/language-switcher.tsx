@@ -31,7 +31,7 @@ export function LanguageSwitcher() {
         <Button variant="outline" size="icon" className="relative w-10 h-10">
           <Languages className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">{t('language.select')}</span>
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full flex items-center justify-center text-[8px] font-bold text-primary-foreground">
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full flex items-center justify-center text-[9px] font-bold text-primary-foreground shadow-sm border border-primary/30">
             {currentLang.substring(0, 2).toUpperCase()}
           </span>
         </Button>
