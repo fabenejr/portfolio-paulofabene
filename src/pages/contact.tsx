@@ -26,12 +26,12 @@ const item = {
   show: { opacity: 1, y: 0 }
 }
 
-// reCAPTCHA site keys - use test keys for development
+// Corrigindo a configuração do reCAPTCHA para usar a chave fornecida
 const RECAPTCHA_SITE_KEYS = {
-  // Production key (for fabenejr.github.io)
+  // Chave de produção (para fabenejr.github.io)
   production: "6LeEMxsrAAAAAIwQciOROmu5rJfmw9Z5X1DcqorD",
-  // Test key (for localhost development)
-  test: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // This is Google's test key
+  // Chave de teste do Google (funciona apenas em localhost e para testes)
+  test: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
 };
 
 export function ContactPage() {
@@ -54,12 +54,23 @@ export function ContactPage() {
   // Set the appropriate reCAPTCHA key based on environment
   useEffect(() => {
     const hostname = window.location.hostname;
-    // Use production key for GitHub Pages, test key for localhost
+    console.log("Current hostname:", hostname); // Debug: Log the current hostname
+    
+    // Para resolver o problema, vamos usar a chave de produção diretamente
+    // independentemente do ambiente (já que a chave de teste pode estar causando o erro)
+    console.log("Using reCAPTCHA key:", RECAPTCHA_SITE_KEYS.production);
+    setRecaptchaSiteKey(RECAPTCHA_SITE_KEYS.production);
+    
+    // Código original comentado:
+    /*
     if (hostname === 'fabenejr.github.io' || hostname.includes('github.io')) {
+      console.log("Using production reCAPTCHA key");
       setRecaptchaSiteKey(RECAPTCHA_SITE_KEYS.production);
     } else {
+      console.log("Using test reCAPTCHA key");
       setRecaptchaSiteKey(RECAPTCHA_SITE_KEYS.test);
     }
+    */
   }, []);
 
   // Update reCAPTCHA theme when site theme changes
@@ -74,6 +85,7 @@ export function ContactPage() {
   }, [resolvedTheme])
 
   const handleCaptchaChange = (token: string | null) => {
+    console.log("reCAPTCHA token received:", token ? "Valid token" : "No token"); // Debug log
     setCaptchaValue(token)
   }
 
@@ -269,6 +281,7 @@ export function ContactPage() {
                     onChange={handleCaptchaChange}
                     theme={captchaTheme}
                     className="overflow-hidden rounded-md"
+                    // Do not set size="invisible" - we're not using invisible reCAPTCHA
                   />
                 </Card>
               </motion.div>
