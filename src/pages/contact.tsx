@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -7,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { Send, Mail, User, MessageSquare, Phone, Building } from "lucide-react"
 import emailjs from '@emailjs/browser'
 import { useToast } from "@/hooks/use-toast"
-
 
 const container = {
   hidden: { opacity: 0 },
@@ -27,7 +27,16 @@ const item = {
 export function ContactPage() {
   const { t } = useTranslation()
   const { toast } = useToast()
-  const [formData, setFormData] = useState({
+  
+  interface FormData {
+    name: string;
+    email: string;
+    phone: string;
+    company: string;
+    message: string;
+  }
+  
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
