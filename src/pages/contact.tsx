@@ -6,9 +6,8 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Send, Mail, User, MessageSquare, Phone, Building } from "lucide-react"
 import emailjs from '@emailjs/browser'
-import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
-import { useTheme } from "next-themes"
+
 
 const container = {
   hidden: { opacity: 0 },
