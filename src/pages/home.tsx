@@ -41,16 +41,27 @@ const item = {
   show: { opacity: 1, y: 0 }
 }
 
-const TechItem = ({ icon: Icon, label, color }: { icon: any; label: string; color: string }) => (
-  <motion.div
-    variants={item}
-    className={`flex items-center gap-2 ${color} px-3 py-1.5 rounded-md bg-background/50 backdrop-blur-sm border tech-item`}
-  >
-    <Icon className="w-4 h-4" />
-    <span className="text-sm font-medium">{label}</span>
-  </motion.div>
-)
+// Estilizando corretamente o ícone do Next.js para tema escuro
+const TechItem = ({ icon: Icon, label, color }: { icon: any; label: string; color: string }) => {
+  // Caso especial para o Next.js no tema escuro
+  const isNextJs = label === "Next.js";
 
+  return (
+    <motion.div
+      variants={item}
+      className={`flex items-center gap-2 ${color} px-3 py-1.5 rounded-md bg-background/50 backdrop-blur-sm border tech-item`}
+    >
+      {isNextJs ? (
+        <Icon className="w-4 h-4 dark:text-white" />
+      ) : (
+        <Icon className="w-4 h-4" />
+      )}
+      <span className="text-sm font-medium">{label}</span>
+    </motion.div>
+  );
+};
+
+// Ícones sociais com melhor contraste e visibilidade
 const SocialLink = ({ href, icon: Icon }: { href: string; icon: any }) => (
   <motion.a
     href={href}
@@ -58,10 +69,9 @@ const SocialLink = ({ href, icon: Icon }: { href: string; icon: any }) => (
     rel="noopener noreferrer"
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.95 }}
+    className="flex items-center justify-center w-9 h-9 rounded-full text-foreground hover:text-primary transition-colors"
   >
-    <Button variant="ghost" size="icon">
-      <Icon className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-    </Button>
+    <Icon className="w-5 h-5" />
   </motion.a>
 )
 

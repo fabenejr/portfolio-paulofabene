@@ -24,11 +24,15 @@
     "description": "Have a question or want to work together? Feel free to reach out!",
     "name": "Name",
     "email": "Email",
+    "phone": "Phone",
+    "company": "Company",
     "message": "Message",
     "submit": "Send Message",
     "placeholders": {
       "name": "John Doe",
       "email": "your.email@example.com",
+      "phone": "(555) 123-4567",
+      "company": "Your Company Inc.",
       "message": "I'm interested in discussing a potential collaboration..."
     }
   },

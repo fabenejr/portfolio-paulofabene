@@ -10,7 +10,7 @@ interface RippleProps extends ComponentPropsWithoutRef<"div"> {
 
 export const Ripple = React.memo(function Ripple({
   mainCircleSize = 210,
-  mainCircleOpacity = 0.24,
+  mainCircleOpacity = 0.28,
   numCircles = 8,
   intensity = 'medium',
   className,
@@ -19,23 +19,23 @@ export const Ripple = React.memo(function Ripple({
   // Adjust animation properties based on intensity
   const intensitySettings = {
     low: {
-      scale: 1.1,
+      scale: 1.15,
       duration: 8,
       delay: 0.08
     },
     medium: {
-      scale: 1.2,
-      duration: 6,
-      delay: 0.06
+      scale: 1.25,
+      duration: 5,
+      delay: 0.05
     },
     high: {
-      scale: 1.3,
-      duration: 4,
-      delay: 0.04
+      scale: 1.35,
+      duration: 3.5,
+      delay: 0.03
     }
   };
 
-  const { scale, duration, delay } = intensitySettings[intensity];
+  const { duration, delay } = intensitySettings[intensity];
 
   return (
     <div
@@ -47,10 +47,10 @@ export const Ripple = React.memo(function Ripple({
     >
       {Array.from({ length: numCircles }, (_, i) => {
         const size = mainCircleSize + i * 70;
-        const opacity = mainCircleOpacity - i * 0.03;
+        const opacity = mainCircleOpacity - i * 0.02;
         const animationDelay = `${i * delay}s`;
         const borderStyle = i === numCircles - 1 ? "dashed" : "solid";
-        const borderOpacity = 5 + i * 5;
+        const borderOpacity = 5 + i * 6;
 
         return (
           <div

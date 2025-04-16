@@ -4,11 +4,12 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { Send, Mail, User, MessageSquare } from "lucide-react"
+import { Send, Mail, User, MessageSquare, Phone, Building } from "lucide-react"
 import emailjs from '@emailjs/browser'
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
 import ReCAPTCHA from "react-google-recaptcha"
+import { useTheme } from "next-themes"
 
 const container = {
   hidden: { opacity: 0 },
@@ -25,20 +26,61 @@ const item = {
   show: { opacity: 1, y: 0 }
 }
 
+// reCAPTCHA site keys - use test keys for development
+const RECAPTCHA_SITE_KEYS = {
+  // Production key (for fabenejr.github.io)
+  production: "6LeEMxsrAAAAAIwQciOROmu5rJfmw9Z5X1DcqorD",
+  // Test key (for localhost development)
+  test: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // This is Google's test key
+};
+
 export function ContactPage() {
   const { t } = useTranslation()
   const { toast } = useToast()
+  const { resolvedTheme } = useTheme()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    company: '',
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [captchaValue, setCaptchaValue] = useState<string | null>(null)
   const recaptchaRef = useRef<ReCAPTCHA>(null)
+  const [captchaTheme, setCaptchaTheme] = useState<"light" | "dark">("light")
+  const [recaptchaSiteKey, setRecaptchaSiteKey] = useState<string>(RECAPTCHA_SITE_KEYS.test)
+
+  // Set the appropriate reCAPTCHA key based on environment
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    // Use production key for GitHub Pages, test key for localhost
+    if (hostname === 'fabenejr.github.io' || hostname.includes('github.io')) {
+      setRecaptchaSiteKey(RECAPTCHA_SITE_KEYS.production);
+    } else {
+      setRecaptchaSiteKey(RECAPTCHA_SITE_KEYS.test);
+    }
+  }, []);
+
+  // Update reCAPTCHA theme when site theme changes
+  useEffect(() => {
+    setCaptchaTheme(resolvedTheme === 'dark' ? 'dark' : 'light')
+    
+    // Reset reCAPTCHA when theme changes to force re-render with new theme
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset()
+      setCaptchaValue(null)
+    }
+  }, [resolvedTheme])
 
   const handleCaptchaChange = (token: string | null) => {
     setCaptchaValue(token)
+  }
+
+  // Get today's date formatted
+  const getCurrentDate = () => {
+    const now = new Date()
+    return now.toLocaleDateString()
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -56,16 +98,23 @@ export function ContactPage() {
     setIsSubmitting(true)
 
     try {
+      // Initialize EmailJS with your user ID
+      emailjs.init("hNeTPqn9QgNhTXVy-")
+      
+      const templateParams = {
+        from_name: formData.name,
+        reply_to: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        message: formData.message,
+        date: getCurrentDate(),
+        'g-recaptcha-response': captchaValue
+      }
+
       await emailjs.send(
         'service_0zhdjeg',
         'template_fkbh4fq',
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          'g-recaptcha-response': captchaValue
-        },
-        'hNeTPqn9QgNhTXVy-'
+        templateParams
       )
 
       toast({
@@ -74,7 +123,7 @@ export function ContactPage() {
         description: "Your message has been sent successfully.",
       })
 
-      setFormData({ name: '', email: '', message: '' })
+      setFormData({ name: '', email: '', phone: '', company: '', message: '' })
       if (recaptchaRef.current) {
         recaptchaRef.current.reset()
       }
@@ -154,6 +203,45 @@ export function ContactPage() {
                 className="space-y-2"
                 variants={item}
               >
+                <Label htmlFor="phone" className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  {t('contact.phone')}
+                </Label>
+                <Input 
+                  id="phone" 
+                  name="phone" 
+                  type="tel" 
+                  value={formData.phone}
+                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                  className="bg-input"
+                  disabled={isSubmitting}
+                  placeholder={t('contact.placeholders.phone')}
+                />
+              </motion.div>
+
+              <motion.div 
+                className="space-y-2"
+                variants={item}
+              >
+                <Label htmlFor="company" className="flex items-center gap-2">
+                  <Building className="w-4 h-4" />
+                  {t('contact.company')}
+                </Label>
+                <Input 
+                  id="company" 
+                  name="company" 
+                  value={formData.company}
+                  onChange={(e) => setFormData(prev => ({ ...prev, company: e.target.value }))}
+                  className="bg-input"
+                  disabled={isSubmitting}
+                  placeholder={t('contact.placeholders.company')}
+                />
+              </motion.div>
+
+              <motion.div 
+                className="space-y-2"
+                variants={item}
+              >
                 <Label htmlFor="message" className="flex items-center gap-2">
                   <MessageSquare className="w-4 h-4" />
                   {t('contact.message')}
@@ -177,10 +265,9 @@ export function ContactPage() {
                 <Card className="p-2 border border-input bg-background shadow-sm">
                   <ReCAPTCHA
                     ref={recaptchaRef}
-                    sitekey="SUA_CHAVE_DE_SITE_REAL_AQUI" // Substitua pela sua chave de site real do Google reCAPTCHA
+                    sitekey={recaptchaSiteKey}
                     onChange={handleCaptchaChange}
-                    theme="light" // Will automatically adapt to the site's theme
-                    size="normal"
+                    theme={captchaTheme}
                     className="overflow-hidden rounded-md"
                   />
                 </Card>
