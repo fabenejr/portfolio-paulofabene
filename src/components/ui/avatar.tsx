@@ -11,7 +11,7 @@ const Avatar = React.forwardRef<
     className={cn(
       "relative flex shrink-0 overflow-hidden rounded-full",
       className
-    )}
+    )} 
     {...props}
   />
 ))
@@ -47,5 +47,59 @@ const AvatarFallback = React.forwardRef<
   />
 ))
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
+
+interface OptimizedAvatarProps {
+  src: string;
+  alt: string;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  withRipple?: boolean;
+}
+
+export function OptimizedAvatar({ 
+  src, 
+  alt, 
+  size = 'md',
+  className = '',
+  withRipple = false
+}: OptimizedAvatarProps) {
+  // Tamanhos para o componente de avatar
+  const sizeClasses = {
+    sm: 'w-20 h-20',
+    md: 'w-28 h-28 md:w-32 md:h-32',
+    lg: 'w-32 h-32 md:w-36 md:h-36'
+  };
+
+  // Ripple circles para o efeito de onda
+  const rippleCircles = withRipple ? (
+    <>
+      <div className="absolute inset-0 z-0">
+        <div className="absolute w-[108%] h-[108%] rounded-full border-2 border-primary/30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[ripple_3s_ease-out_0s_infinite]"></div>
+        <div className="absolute w-[120%] h-[120%] rounded-full border-2 border-primary/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[ripple_3s_ease-out_0.5s_infinite]"></div>
+        <div className="absolute w-[135%] h-[135%] rounded-full border-2 border-primary/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[ripple_3s_ease-out_1s_infinite]"></div>
+      </div>
+    </>
+  ) : null;
+
+  return (
+    <div 
+      className={`relative inline-block ${sizeClasses[size]} ${className}`}
+    >
+      {rippleCircles}
+      <div className="relative z-10 w-full h-full rounded-full overflow-hidden">
+        <img
+          src={src}
+          alt={alt}
+          width={300}
+          height={300}
+          className="w-full h-full object-cover"
+          style={{
+            objectPosition: 'center 35%'
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
 export { Avatar, AvatarImage, AvatarFallback }

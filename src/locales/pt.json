@@ -25,7 +25,12 @@
     "name": "Nome",
     "email": "Email",
     "message": "Mensagem",
-    "submit": "Enviar Mensagem"
+    "submit": "Enviar Mensagem",
+    "placeholders": {
+      "name": "João Silva",
+      "email": "seu.email@exemplo.com",
+      "message": "Estou interessado em discutir uma possível colaboração..."
+    }
   },
   "theme": {
     "toggle": "Alternar tema",

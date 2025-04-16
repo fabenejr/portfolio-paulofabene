@@ -2,9 +2,11 @@ import { useTranslation } from "react-i18next"
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Ripple } from "@/components/magicui/ripple";
+import { OptimizedAvatar } from "@/components/ui/avatar"
 
-import profileImage from '@/assets/images/profilebeach.jpg'
+// import profileImage from '@/assets/images/profilebeach.jpg'
+// Usando a imagem do GitHub para manter atualizado automaticamente
+const githubProfileImage = "https://github.com/fabenejr.png";
 
 import {
   SiReact,
@@ -74,33 +76,21 @@ export function HomePage() {
       animate="show"
       exit={{ opacity: 0, y: 20 }}
     >
-        <motion.div variants={item}>
-      <Card className="bg-background/80 backdrop-blur-sm border shadow-lg">
-        <div className="p-6 flex flex-col md:flex-row gap-6 relative">
-          {/* Verifique a visibilidade do ripple aqui */}
-
-          <Ripple className="absolute inset-0 z-10 animate-ripple" />
-
-
-          <div className="flex-shrink-0">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden">
-            
-              <motion.div className="relative z-20 rounded-full overflow-hidden shadow-xl w-full h-full">
-                <picture className="block w-full h-full">
-                  <source srcSet={profileImage} type="image/webp" />
-                  <img
-                    src={profileImage}
-                    alt="Paulo Fabene"
-                    className="w-full h-full object-cover rounded-full"
-                    width={400}
-                    height={400}
-                  />
-                </picture>
-              </motion.div>
-              </div>
+      <motion.div variants={item}>
+        <Card className="bg-background/80 backdrop-blur-sm border shadow-lg">
+          <div className="p-6 flex flex-col items-center text-center relative">
+            {/* Integrando o avatar com o ripple diretamente */}
+            <div className="relative z-20 mb-2">
+              <OptimizedAvatar
+                src={githubProfileImage}
+                alt="Paulo Fabene"
+                size="md"
+                className="mx-auto"
+                withRipple={true}
+              />
             </div>
 
-            <div className="flex-grow space-y-4">
+            <div className="space-y-4 z-20 relative">
               <div>
                 <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
                   Paulo Fabene
@@ -110,7 +100,7 @@ export function HomePage() {
               </div>
 
               <motion.div 
-                className="flex flex-wrap gap-2"
+                className="flex flex-wrap justify-center gap-2"
                 variants={container}
                 initial="hidden"
                 animate="show"
@@ -123,7 +113,7 @@ export function HomePage() {
                 <TechItem icon={SiPrisma} label="Prisma" color="text-indigo-500" />
               </motion.div>
 
-              <div className="flex gap-2">
+              <div className="flex justify-center gap-2">
                 <SocialLink href="https://www.linkedin.com/in/paulofabene/" icon={FaLinkedin} />
                 <SocialLink href="https://github.com/fabenejr" icon={FaGithub} />
                 <SocialLink href="https://twitter.com/fabenejr" icon={FaXTwitter} />

@@ -6,8 +6,9 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Send, Mail, User, MessageSquare } from "lucide-react"
 import emailjs from '@emailjs/browser'
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useToast } from "@/hooks/use-toast"
+import ReCAPTCHA from "react-google-recaptcha"
 
 const container = {
   hidden: { opacity: 0 },
@@ -33,9 +34,25 @@ export function ContactPage() {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
+
+  const handleCaptchaChange = (token: string | null) => {
+    setCaptchaValue(token)
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    
+    if (!captchaValue) {
+      toast({
+        variant: "destructive",
+        title: "Verification Required",
+        description: "Please complete the reCAPTCHA verification.",
+      })
+      return
+    }
+    
     setIsSubmitting(true)
 
     try {
@@ -46,6 +63,7 @@ export function ContactPage() {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
+          'g-recaptcha-response': captchaValue
         },
         'hNeTPqn9QgNhTXVy-'
       )
@@ -57,6 +75,10 @@ export function ContactPage() {
       })
 
       setFormData({ name: '', email: '', message: '' })
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset()
+      }
+      setCaptchaValue(null)
     } catch (error) {
       console.error('Error sending email:', error)
       toast({
@@ -103,6 +125,7 @@ export function ContactPage() {
                   className="bg-input"
                   required 
                   disabled={isSubmitting}
+                  placeholder={t('contact.placeholders.name')}
                 />
               </motion.div>
 
@@ -123,6 +146,7 @@ export function ContactPage() {
                   className="bg-input"
                   required 
                   disabled={isSubmitting}
+                  placeholder={t('contact.placeholders.email')}
                 />
               </motion.div>
 
@@ -142,14 +166,31 @@ export function ContactPage() {
                   className="w-full min-h-[150px] rounded-md border bg-input p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
                   required
                   disabled={isSubmitting}
+                  placeholder={t('contact.placeholders.message')}
                 />
+              </motion.div>
+
+              <motion.div 
+                className="flex justify-center my-4"
+                variants={item}
+              >
+                <Card className="p-2 border border-input bg-background shadow-sm">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey="SUA_CHAVE_DE_SITE_REAL_AQUI" // Substitua pela sua chave de site real do Google reCAPTCHA
+                    onChange={handleCaptchaChange}
+                    theme="light" // Will automatically adapt to the site's theme
+                    size="normal"
+                    className="overflow-hidden rounded-md"
+                  />
+                </Card>
               </motion.div>
 
               <motion.div variants={item}>
                 <Button 
                   type="submit" 
                   className="w-full relative" 
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !captchaValue}
                 >
                   {isSubmitting ? (
                     <motion.div

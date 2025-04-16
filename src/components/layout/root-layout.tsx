@@ -31,13 +31,13 @@ export function RootLayout() {
         variants={navVariants}
         transition={{ duration: 0.5 }}
       >
-        <div className="container flex h-14 items-center">
-          <NavigationMenu className="flex-1">
-            <NavigationMenuList>
+        <div className="container flex h-14 items-center justify-between">
+          <NavigationMenu className="flex-1 mr-auto">
+            <NavigationMenuList className="md:space-x-2">
               <NavigationMenuItem>
                 <NavigationMenuLink
                   className={cn(
-                    "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                    "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-3 md:px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
                     location.pathname === "/" && "bg-accent text-accent-foreground"
                   )}
                   asChild
@@ -48,7 +48,7 @@ export function RootLayout() {
               <NavigationMenuItem>
                 <NavigationMenuLink
                   className={cn(
-                    "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                    "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-3 md:px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
                     location.pathname.includes("/contact") && "bg-accent text-accent-foreground"
                   )}
                   asChild
@@ -58,7 +58,7 @@ export function RootLayout() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3 md:gap-4 ml-3 md:ml-0">
             <LanguageSwitcher />
             <ThemeToggle />
           </div>

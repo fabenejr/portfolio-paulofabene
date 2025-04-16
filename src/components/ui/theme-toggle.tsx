@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
-  const {  setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   const { t } = useTranslation()
   
   useEffect(() => {
@@ -19,8 +19,18 @@ export function ThemeToggle() {
     }
   }, [setTheme])
 
+  // Add a special class to the body element when dark mode is active
+  useEffect(() => {
+    if (mounted) {
+      document.body.classList.toggle('dark-theme', resolvedTheme === 'dark');
+      
+      // Force reflow to ensure all components render correctly with new theme
+      window.dispatchEvent(new Event('resize'));
+    }
+  }, [resolvedTheme, mounted]);
+
   if (!mounted) {
-    return <Button variant="outline" size="icon" disabled />
+    return <Button variant="outline" size="icon" disabled className="w-10 h-10" />
   }
 
   const isLight = resolvedTheme === "light"
@@ -34,7 +44,7 @@ export function ThemeToggle() {
         setTheme(newTheme)
         localStorage.setItem('theme', newTheme)
       }}
-      className="relative"
+      className="relative overflow-hidden w-10 h-10"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
@@ -43,7 +53,7 @@ export function ThemeToggle() {
           animate={{ scale: 1, opacity: 1, rotate: 0 }}
           exit={{ scale: 0, opacity: 0, rotate: 180 }}
           transition={{ duration: 0.2 }}
-          className="absolute"
+          className="absolute inset-0 flex items-center justify-center"
         >
           {isLight ? (
             <Sun className="h-[1.2rem] w-[1.2rem]" />
