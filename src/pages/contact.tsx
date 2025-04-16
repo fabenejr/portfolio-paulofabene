@@ -6,9 +6,8 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Send, Mail, User, MessageSquare, Phone, Building } from "lucide-react"
 import emailjs from '@emailjs/browser'
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
-import ReCAPTCHA from "react-google-recaptcha"
 import { useTheme } from "next-themes"
 
 const container = {
@@ -26,18 +25,9 @@ const item = {
   show: { opacity: 1, y: 0 }
 }
 
-// Corrigindo a configuração do reCAPTCHA para usar a chave fornecida
-const RECAPTCHA_SITE_KEYS = {
-  // Chave de produção (para fabenejr.github.io)
-  production: "6LeEMxsrAAAAAIwQciOROmu5rJfmw9Z5X1DcqorD",
-  // Chave de teste do Google (funciona apenas em localhost e para testes)
-  test: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-};
-
 export function ContactPage() {
   const { t } = useTranslation()
   const { toast } = useToast()
-  const { resolvedTheme } = useTheme()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -46,48 +36,6 @@ export function ContactPage() {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [captchaValue, setCaptchaValue] = useState<string | null>(null)
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
-  const [captchaTheme, setCaptchaTheme] = useState<"light" | "dark">("light")
-  const [recaptchaSiteKey, setRecaptchaSiteKey] = useState<string>(RECAPTCHA_SITE_KEYS.test)
-
-  // Set the appropriate reCAPTCHA key based on environment
-  useEffect(() => {
-    const hostname = window.location.hostname;
-    console.log("Current hostname:", hostname); // Debug: Log the current hostname
-    
-    // Para resolver o problema, vamos usar a chave de produção diretamente
-    // independentemente do ambiente (já que a chave de teste pode estar causando o erro)
-    console.log("Using reCAPTCHA key:", RECAPTCHA_SITE_KEYS.production);
-    setRecaptchaSiteKey(RECAPTCHA_SITE_KEYS.production);
-    
-    // Código original comentado:
-    /*
-    if (hostname === 'fabenejr.github.io' || hostname.includes('github.io')) {
-      console.log("Using production reCAPTCHA key");
-      setRecaptchaSiteKey(RECAPTCHA_SITE_KEYS.production);
-    } else {
-      console.log("Using test reCAPTCHA key");
-      setRecaptchaSiteKey(RECAPTCHA_SITE_KEYS.test);
-    }
-    */
-  }, []);
-
-  // Update reCAPTCHA theme when site theme changes
-  useEffect(() => {
-    setCaptchaTheme(resolvedTheme === 'dark' ? 'dark' : 'light')
-    
-    // Reset reCAPTCHA when theme changes to force re-render with new theme
-    if (recaptchaRef.current) {
-      recaptchaRef.current.reset()
-      setCaptchaValue(null)
-    }
-  }, [resolvedTheme])
-
-  const handleCaptchaChange = (token: string | null) => {
-    console.log("reCAPTCHA token received:", token ? "Valid token" : "No token"); // Debug log
-    setCaptchaValue(token)
-  }
 
   // Get today's date formatted
   const getCurrentDate = () => {
@@ -97,16 +45,6 @@ export function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
-    if (!captchaValue) {
-      toast({
-        variant: "destructive",
-        title: "Verification Required",
-        description: "Please complete the reCAPTCHA verification.",
-      })
-      return
-    }
-    
     setIsSubmitting(true)
 
     try {
@@ -119,8 +57,7 @@ export function ContactPage() {
         phone: formData.phone,
         company: formData.company,
         message: formData.message,
-        date: getCurrentDate(),
-        'g-recaptcha-response': captchaValue
+        date: getCurrentDate()
       }
 
       await emailjs.send(
@@ -136,10 +73,6 @@ export function ContactPage() {
       })
 
       setFormData({ name: '', email: '', phone: '', company: '', message: '' })
-      if (recaptchaRef.current) {
-        recaptchaRef.current.reset()
-      }
-      setCaptchaValue(null)
     } catch (error) {
       console.error('Error sending email:', error)
       toast({
@@ -270,27 +203,11 @@ export function ContactPage() {
                 />
               </motion.div>
 
-              <motion.div 
-                className="flex justify-center my-4"
-                variants={item}
-              >
-                <Card className="p-2 border border-input bg-background shadow-sm">
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={recaptchaSiteKey}
-                    onChange={handleCaptchaChange}
-                    theme={captchaTheme}
-                    className="overflow-hidden rounded-md"
-                    // Do not set size="invisible" - we're not using invisible reCAPTCHA
-                  />
-                </Card>
-              </motion.div>
-
               <motion.div variants={item}>
                 <Button 
                   type="submit" 
                   className="w-full relative" 
-                  disabled={isSubmitting || !captchaValue}
+                  disabled={isSubmitting}
                 >
                   {isSubmitting ? (
                     <motion.div
