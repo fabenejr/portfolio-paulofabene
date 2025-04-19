@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useState } from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 import { cn } from "@/lib/utils"
 
@@ -63,6 +64,8 @@ export function OptimizedAvatar({
   className = '',
   withRipple = false
 }: OptimizedAvatarProps) {
+  const [hasError, setHasError] = useState(false);
+  
   // Tamanhos para o componente de avatar
   const sizeClasses = {
     sm: 'w-20 h-20',
@@ -81,22 +84,37 @@ export function OptimizedAvatar({
     </>
   ) : null;
 
+  const handleImageError = () => {
+    setHasError(true);
+    // Removing console.warn for production
+  };
+
   return (
-    <div 
-      className={`relative inline-block ${sizeClasses[size]} ${className}`}
-    >
+    <div className={`relative inline-block ${sizeClasses[size]} ${className}`}>
       {rippleCircles}
-      <div className="relative z-10 w-full h-full rounded-full overflow-hidden">
-        <img
-          src={src}
-          alt={alt}
-          width={300}
-          height={300}
-          className="w-full h-full object-cover"
-          style={{
-            objectPosition: 'center 35%'
-          }}
-        />
+      <div className="relative z-10 w-full h-full rounded-full overflow-hidden bg-muted">
+        <picture>
+          <source srcSet={src} type="image/webp" />
+          <source srcSet={src} type="image/jpeg" />
+          <img
+            src={src}
+            alt={alt}
+            width={300}
+            height={300}
+            className="w-full h-full object-cover"
+            style={{
+              objectPosition: 'center 35%'
+            }}
+            loading="eager"
+            decoding="async"
+            onError={handleImageError}
+          />
+        </picture>
+        {hasError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground">
+            <span className="text-lg font-semibold">{alt.charAt(0)}</span>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 import { Separator } from "./separator"
 import { motion } from "framer-motion"
 import { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent } from "./tooltip"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 interface TimelineItemProps {
   year: string
@@ -24,14 +24,7 @@ function CompanyLogo({ logo, company, iconBg }: { logo?: string; company: string
   const [hasError, setHasError] = useState(false)
   const initial = company.charAt(0).toUpperCase()
 
-  useEffect(() => {
-    if (logo) {
-      console.log(`Tentando carregar logo para ${company}:`, logo)
-    }
-  }, [logo, company])
-
-  const handleImageError = (error: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.error(`Erro ao carregar logo para ${company}:`, error)
+  const handleImageError = () => {
     setHasError(true)
   }
 
@@ -54,6 +47,7 @@ function CompanyLogo({ logo, company, iconBg }: { logo?: string; company: string
         className="w-full h-full object-cover"
         onError={handleImageError}
         loading="lazy"
+        decoding="async"
       />
     </div>
   )
@@ -76,12 +70,12 @@ export function TimelineItem({ year, title, company, description, logo, iconBg, 
           transition={{ delay: 0.2 }}
         />
       </div>
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-3">
+      <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
+        <div className="flex items-start gap-3 w-full sm:w-auto">
           <TooltipProvider>
             <TooltipRoot>
               <TooltipTrigger asChild>
-                <div className="cursor-pointer mt-1">
+                <div className="cursor-pointer mt-1 shrink-0">
                   <CompanyLogo logo={logo} company={company} iconBg={iconBg} />
                 </div>
               </TooltipTrigger>
@@ -90,11 +84,11 @@ export function TimelineItem({ year, title, company, description, logo, iconBg, 
               </TooltipContent>
             </TooltipRoot>
           </TooltipProvider>
-          <div className="space-y-1">
-            <div className="text-base font-semibold group-hover:text-primary transition-colors">{title}</div>
+          <div className="space-y-1 min-w-0">
+            <div className="text-base font-semibold group-hover:text-primary transition-colors line-clamp-2 sm:line-clamp-none">{title}</div>
             <div className="text-sm text-muted-foreground">{company}</div>
             <motion.div 
-              className="text-sm text-muted-foreground leading-relaxed"
+              className="text-sm text-muted-foreground leading-relaxed break-words"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -103,12 +97,12 @@ export function TimelineItem({ year, title, company, description, logo, iconBg, 
             </motion.div>
           </div>
         </div>
-        <div className="text-sm tabular-nums text-muted-foreground whitespace-nowrap group-hover:text-primary transition-colors">{year}</div>
+        <div className="text-sm tabular-nums text-muted-foreground whitespace-nowrap group-hover:text-primary transition-colors sm:text-right mt-2 sm:mt-0">{year}</div>
       </div>
       
       {skills && skills.length > 0 && (
         <motion.div 
-          className="flex flex-wrap gap-2 ml-[52px]"
+          className="flex flex-wrap gap-2 ml-[52px] mt-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}

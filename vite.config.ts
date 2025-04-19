@@ -23,14 +23,15 @@ export default defineConfig({
           'ui-vendor': ['@radix-ui/react-avatar', '@radix-ui/react-dropdown-menu', '@radix-ui/react-navigation-menu', '@radix-ui/react-separator', '@radix-ui/react-slot'],
           'animation-vendor': ['framer-motion'],
           'i18n-vendor': ['i18next', 'react-i18next']
-        },
-        assetFileNames: 'assets/[name].[ext]'
+        }
       }
     },
     chunkSizeWarningLimit: 1000,
+    assetsDir: 'assets',
+    sourcemap: true,
   },
-  // Add public directory configuration
-  publicDir: 'public',
   // Configure static asset handling
-  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif', '**/*.svg']
+  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif', '**/*.svg', '**/*.ico'],
+  // Add public directory configuration
+  publicDir: 'public'
 })

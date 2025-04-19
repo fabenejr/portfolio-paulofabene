@@ -5,13 +5,19 @@ import ptTranslations from '../locales/pt.json'
 
 // Try to get stored language preference
 let storedLanguage = 'en'
-try {
-  const stored = localStorage.getItem('i18nextLng')
-  if (stored) {
-    storedLanguage = stored
+
+// Check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined'
+
+if (isBrowser) {
+  try {
+    const stored = localStorage.getItem('i18nextLng')
+    if (stored) {
+      storedLanguage = stored
+    }
+  } catch (error) {
+    console.warn('Failed to access localStorage for language preference')
   }
-} catch (error) {
-  console.warn('Failed to access localStorage for language preference:', error)
 }
 
 i18n.use(initReactI18next).init({

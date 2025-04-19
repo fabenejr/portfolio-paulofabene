@@ -29,10 +29,12 @@ export function ExperiencePage() {
       className="space-y-6"
     >
       <motion.div variants={item}>
-        <Card className="bg-card">
-          <div className="p-6">
+        <Card className="relative bg-card/50 backdrop-blur-sm">
+          <div className="relative z-10 p-6">
             <h1 className="text-3xl font-bold tracking-tighter mb-2">{t('experience.title')}</h1>
             <p className="text-muted-foreground">{t('experience.subtitle')}</p>
+          </div>
+          <div className="relative">
             <Experience />
           </div>
         </Card>

@@ -19,90 +19,66 @@ const experiences = [
   },
   {
     year: "2022 - 2023",
-    title: "Customer Service Analyst",
+    title: "Back-end Developer",
     company: "Movidesk LTDA",
     logo: movideskLogo,
-    iconBg: "#00A6CE",
+    iconBg: "#0077FF",
     description: "experience.items.movidesk_analyst.description",
-    skills: ["Technical Support", "API Testing", "Bug Analysis", "DevTools", "Javascript"]
-  },
-  {
-    year: "2022",
-    title: "Implementation Success Manager",
-    company: "Movidesk LTDA",
-    logo: movideskLogo,
-    iconBg: "#00A6CE",
-    description: "experience.items.movidesk_manager.description",
-    skills: ["Project Management", "Customer Success", "Helpdesk Implementation"]
+    skills: ["Node.js", "TypeScript", "MongoDB", "Redis", "API Development", "Scrum"]
   },
   {
     year: "2021 - 2022",
-    title: "Customer Success Analyst - Implementation",
+    title: "Back-end Developer",
     company: "Omiexperience LTDA",
     logo: omieLogo,
-    iconBg: "#00B98E",
-    description: "experience.items.omiexperience.description",
-    skills: ["ERP Systems", "Customer Success", "Implementation"]
+    iconBg: "#00A1E4",
+    description: "experience.items.movidesk_manager.description",
+    skills: ["Node.js", "TypeScript", "PostgreSQL", "Redis", "API Development", "Git"]
   },
   {
-    year: "2019 - 2021",
-    title: "Implementation Analyst",
+    year: "2020 - 2021",
+    title: "Full Stack Developer",
     company: "Londrisoft Software Industry",
     logo: londrisoftLogo,
-    iconBg: "#143C8C",
+    iconBg: "#4A5568",
     description: "experience.items.londrisoft_implementation.description",
-    skills: ["System Implementation", "Training", "Requirements Analysis"]
-  },
-  {
-    year: "2018 - 2019",
-    title: "Technical Support Analyst",
-    company: "Londrisoft Software Industry",
-    logo: londrisoftLogo,
-    iconBg: "#143C8C",
-    description: "experience.items.londrisoft_support.description",
-    skills: ["Technical Support", "SQL", "Hardware Configuration", "Firebird database"]
+    skills: ["JavaScript", "Node.js", "React", "MySQL", "Git", "Scrum"]
   }
 ]
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-}
 
 export function Experience() {
   const { t } = useTranslation()
   
-  // Translate experience descriptions but keep titles in English
   const translatedExperiences = experiences.map(exp => ({
     ...exp,
+    title: exp.title,
+    company: exp.company,
     description: t(exp.description)
   }))
 
   return (
     <motion.div 
-      className="mt-8 relative"
-      variants={container}
-      initial="hidden"
-      animate="show"
+      className="relative"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
     >
-      {/* Decorative elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/50 to-background pointer-events-none" />
-      <div className="absolute inset-0 -z-10">
-        <Ripple 
+      <div className="relative z-0">
+        <Ripple
+          className="absolute inset-0"
+          numCircles={4}
           intensity="low"
-          mainCircleSize={200}
-          mainCircleOpacity={0.1}
-          numCircles={3}
+          mainCircleOpacity={0.15}
         />
       </div>
-      
-      {/* Timeline content */}
-      <Timeline items={translatedExperiences} />
+      <motion.div 
+        className="relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        <Timeline items={translatedExperiences} />
+      </motion.div>
     </motion.div>
   )
 }

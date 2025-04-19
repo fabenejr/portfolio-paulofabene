@@ -14,40 +14,23 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "portfolio-theme",
+  enableSystem = true
 }: ThemeProviderProps) {
-  const [mounted, setMounted] = useState(false)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-    // Handle initial theme
-    try {
-      const savedTheme = localStorage.getItem(storageKey)
-      if (savedTheme) {
-        document.documentElement.classList.toggle('dark', savedTheme === 'dark')
-      } else {
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-        document.documentElement.classList.toggle('dark', systemDark)
-      }
-    } catch (error) {
-      console.warn('Failed to access localStorage:', error)
-      // Fallback to system preference
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      document.documentElement.classList.toggle('dark', systemDark)
-    }
-  }, [storageKey])
-
-  if (!mounted) {
-    return null
-  }
+    setReady(true)
+  }, [])
 
   return (
-    <ThemeProviderContext.Provider value={{ ready: mounted }}>
+    <ThemeProviderContext.Provider value={{ ready }}>
       <NextThemesProvider
         attribute="class"
         defaultTheme={defaultTheme}
-        enableSystem
-        disableTransitionOnChange
+        enableSystem={enableSystem}
+        enableColorScheme
         storageKey={storageKey}
+        disableTransitionOnChange
       >
         {children}
       </NextThemesProvider>

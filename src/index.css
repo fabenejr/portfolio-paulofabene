@@ -25,7 +25,6 @@
   animation: ripple var(--duration, 2s) ease-out calc(var(--i, 0) * 0.2s) infinite;
 }
 
-
 @layer base {
 
   :root {
@@ -49,6 +48,18 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: hidden;
+    touch-action: manipulation;
   }
 
   .dark {
@@ -181,6 +192,11 @@ button:focus-visible {
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
   }
 }
 
@@ -202,6 +218,7 @@ button:focus-visible {
 
 ::-webkit-scrollbar-track {
   @apply bg-muted/50;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -234,4 +251,45 @@ button:focus-visible {
 .tech-item:hover {
   @apply shadow-md;
   transform: translateY(-1px) scale(1.02);
+}
+
+/* Improve text rendering */
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) {
+    .text-gradient {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 640px) {
+  button, 
+  [role="button"],
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .experience-description {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+}
+
+/* Fix iOS Safari border radius overflow issue */
+@supports (-webkit-touch-callout: none) {
+  .overflow-hidden {
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+}
+
+/* Smoother animations on Safari */
+@supports (-webkit-touch-callout: none) {
+  .animate-all {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+  }
 }
