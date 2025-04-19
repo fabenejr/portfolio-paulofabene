@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,6 +9,7 @@ import { Send, Mail, User, MessageSquare, Phone, Building } from "lucide-react"
 import emailjs from '@emailjs/browser'
 import { useToast } from "@/hooks/use-toast"
 
+// Animation variants
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -24,9 +25,25 @@ const item = {
   show: { opacity: 1, y: 0 }
 }
 
+// Rate limiting
+const RATE_LIMIT_TIME = 60000 // 1 minuto
+const MAX_ATTEMPTS = 3
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      enterprise: {
+        ready: (callback: () => void) => void;
+        execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      };
+    };
+  }
+}
+
 export function ContactPage() {
   const { t } = useTranslation()
   const { toast } = useToast()
+  const formRef = useRef<HTMLFormElement>(null)
   
   interface FormData {
     name: string;
@@ -44,20 +61,81 @@ export function ContactPage() {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [attempts, setAttempts] = useState(0)
+  const [lastSubmitTime, setLastSubmitTime] = useState(0)
 
-  // Get today's date formatted
-  const getCurrentDate = () => {
-    const now = new Date()
-    return now.toLocaleDateString()
+  useEffect(() => {
+    // Inicializa o reCAPTCHA Enterprise
+    window.grecaptcha?.enterprise?.ready(() => {
+      console.log('reCAPTCHA Enterprise ready')
+    })
+  }, [])
+
+  // Validação de email
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  // Rate limiting check
+  const isRateLimited = () => {
+    const now = Date.now()
+    if (attempts >= MAX_ATTEMPTS && now - lastSubmitTime < RATE_LIMIT_TIME) {
+      return true
+    }
+    if (now - lastSubmitTime >= RATE_LIMIT_TIME) {
+      setAttempts(0)
+    }
+    return false
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    
+    // Validações básicas
+    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+      toast({
+        variant: "destructive",
+        title: "Erro",
+        description: "Por favor, preencha todos os campos obrigatórios.",
+      })
+      return
+    }
+
+    if (!isValidEmail(formData.email)) {
+      toast({
+        variant: "destructive",
+        title: "Erro",
+        description: "Por favor, insira um email válido.",
+      })
+      return
+    }
+
+    // Rate limiting
+    if (isRateLimited()) {
+      toast({
+        variant: "destructive",
+        title: "Erro",
+        description: `Por favor, aguarde ${RATE_LIMIT_TIME/1000} segundos antes de tentar novamente.`,
+      })
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
-      // Initialize EmailJS with your user ID
-      emailjs.init("hNeTPqn9QgNhTXVy-")
+      // Obter token do reCAPTCHA Enterprise
+      if (!window.grecaptcha?.enterprise) {
+        throw new Error('reCAPTCHA não foi carregado corretamente')
+      }
+
+      const token = await window.grecaptcha.enterprise.execute(
+        '6LeEMxsrAAAAAIwQciOROmu5rJfmw9Z5X1DcqorD',
+        { action: 'submit' }
+      )
+
+      // Inicializar EmailJS
+      emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
       
       const templateParams = {
         from_name: formData.name,
@@ -65,28 +143,34 @@ export function ContactPage() {
         phone: formData.phone,
         company: formData.company,
         message: formData.message,
-        date: getCurrentDate()
+        'g-recaptcha-response': token
       }
 
       await emailjs.send(
-        'service_0zhdjeg',
-        'template_fkbh4fq',
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         templateParams
       )
 
+      // Atualizar contadores de rate limiting
+      setAttempts(prev => prev + 1)
+      setLastSubmitTime(Date.now())
+
       toast({
         variant: "success",
-        title: "Success!",
-        description: "Your message has been sent successfully.",
+        title: "Sucesso!",
+        description: "Sua mensagem foi enviada com sucesso.",
       })
 
+      // Resetar formulário
       setFormData({ name: '', email: '', phone: '', company: '', message: '' })
+
     } catch (error) {
-      console.error('Error sending email:', error)
+      console.error('Erro ao enviar mensagem:', error)
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "Failed to send message. Please try again.",
+        title: "Erro",
+        description: error instanceof Error ? error.message : "Falha ao enviar mensagem. Por favor, tente novamente.",
       })
     } finally {
       setIsSubmitting(false)
@@ -110,14 +194,14 @@ export function ContactPage() {
               </p>
             </div>
             
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <motion.div 
                 className="space-y-2"
                 variants={item}
               >
                 <Label htmlFor="name" className="flex items-center gap-2">
                   <User className="w-4 h-4" />
-                  {t('contact.name')}
+                  {t('contact.name')} *
                 </Label>
                 <Input 
                   id="name" 
@@ -137,7 +221,7 @@ export function ContactPage() {
               >
                 <Label htmlFor="email" className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  {t('contact.email')}
+                  {t('contact.email')} *
                 </Label>
                 <Input 
                   id="email" 
@@ -158,7 +242,7 @@ export function ContactPage() {
               >
                 <Label htmlFor="phone" className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  {t('contact.phone')}
+                  {t('contact.phone')} *
                 </Label>
                 <Input 
                   id="phone" 
@@ -167,6 +251,7 @@ export function ContactPage() {
                   value={formData.phone}
                   onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                   className="bg-input"
+                  required
                   disabled={isSubmitting}
                   placeholder={t('contact.placeholders.phone')}
                 />
@@ -197,7 +282,7 @@ export function ContactPage() {
               >
                 <Label htmlFor="message" className="flex items-center gap-2">
                   <MessageSquare className="w-4 h-4" />
-                  {t('contact.message')}
+                  {t('contact.message')} *
                 </Label>
                 <textarea 
                   id="message" 

@@ -1,17 +1,48 @@
 {
   "header": {
-    "role": "Analista e Desenvolvedor de Sistemas | Soluções AWS",
+    "role": "Analista e Desenvolvedor de Sistemas",
     "location": "Londrina, Brasil"
   },
   "nav": {
     "about": "Sobre",
     "contact": "Contato",
-    "projects": "Projetos"
+    "projects": "Projetos",
+    "experience": "Experiência"
   },
   "about": {
     "title": "Sobre mim",
     "description": "Analista e Desenvolvedor de Sistemas certificado, formado em 2020, com foco em criar soluções inovadoras usando chatbots, arquiteturas serverless, Node.js e AWS Lambda. Minha experiência inclui não só o desenvolvimento técnico, mas também o atendimento e suporte ao cliente, além da implantação e consultoria de sistemas.",
     "passion": "Fora do trabalho, me dedico à família e gosto de relaxar jogando. Estou sempre buscando crescer, seja através da leitura ou do aprimoramento de habilidades técnicas em Docker, Kubernetes e AWS, além de trabalhar constantemente para melhorar minha fluência em inglês. Sempre aberto para conexões e discussões que promovam o crescimento mútuo e a inovação."
+  },
+  "experience": {
+    "title": "Experiência Profissional",
+    "subtitle": "Minha jornada profissional até aqui",
+    "items": {
+      "zenvia": {
+        "title": "Desenvolvedor de Operações",
+        "description": "Desenvolvimento de projetos em diferentes plataformas como chatbot, helpdesk e disparo de documentos. Responsabilidades incluem publicação de projetos, manutenção, integração de plataformas através de APIs e webhooks, criação de documentação técnica, correção de bugs e gerenciamento de projetos através do JIRA."
+      },
+      "movidesk_analyst": {
+        "title": "Analista de Suporte ao Cliente",
+        "description": "Realizei atendimento ao cliente com foco em resolução de problemas técnicos. Coletei evidências no devtools dos navegadores para documentação, realizei requisições e testes de API, e conduzi análises detalhadas de bugs para a equipe de desenvolvimento."
+      },
+      "movidesk_manager": {
+        "title": "Gerente de Sucesso de Implantação",
+        "description": "Liderei projetos de implantação de software Helpdesk, identificando necessidades e mapeando fluxos de trabalho. Gerenciei carteira de clientes em fase de onboarding e realizei acompanhamento contínuo para garantir o sucesso da implantação."
+      },
+      "omiexperience": {
+        "title": "Analista de Sucesso do Cliente - Implantação",
+        "description": "Responsável pela implementação do Sistema em clientes, gerenciando todo o processo de onboarding. Gerenciei carteira de clientes durante a fase de implantação."
+      },
+      "londrisoft_implementation": {
+        "title": "Analista de Implantação",
+        "description": "Responsável pela implantação do Sistema em empresas, realizando entrevistas para levantamento de necessidades e ministrando treinamentos. Acompanhei jornadas de implantação, prazos estipulados, e coordenei operações internas para melhorar a qualidade do serviço."
+      },
+      "londrisoft_support": {
+        "title": "Analista de Suporte Técnico",
+        "description": "Atendimento ao cliente via telefone, chat e presencialmente. Realizei abertura e gerenciamento de tickets, consultas em bancos de dados para resolução de problemas, e configuração de impressora não fiscal."
+      }
+    }
   },
   "skills": {
     "title": "Habilidades & Tecnologias",

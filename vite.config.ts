@@ -28,5 +28,9 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 1000,
-  }
+  },
+  // Add public directory configuration
+  publicDir: 'public',
+  // Configure static asset handling
+  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif', '**/*.svg']
 })
