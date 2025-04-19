@@ -34,7 +34,7 @@ export function ThemeToggle() {
   }, [resolvedTheme, mounted]);
 
   if (!mounted) {
-    return <Button variant="outline" size="icon" disabled className="w-10 h-10" />
+    return <Button variant="outline" size="icon" disabled className="w-9 h-9 sm:w-10 sm:h-10" />
   }
 
   const isLight = resolvedTheme === "light"
@@ -52,7 +52,7 @@ export function ThemeToggle() {
           console.warn('Failed to save theme to localStorage:', error)
         }
       }}
-      className="relative overflow-hidden w-10 h-10"
+      className="relative overflow-hidden w-9 h-9 sm:w-10 sm:h-10 p-1.5 sm:p-2"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
@@ -64,9 +64,9 @@ export function ThemeToggle() {
           className="absolute inset-0 flex items-center justify-center"
         >
           {isLight ? (
-            <Sun className="h-[1.2rem] w-[1.2rem]" />
+            <Sun className="h-[1rem] w-[1rem] sm:h-[1.2rem] sm:w-[1.2rem]" />
           ) : (
-            <Moon className="h-[1.2rem] w-[1.2rem]" />
+            <Moon className="h-[1rem] w-[1rem] sm:h-[1.2rem] sm:w-[1.2rem]" />
           )}
         </motion.div>
       </AnimatePresence>
