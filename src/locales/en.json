@@ -3,6 +3,12 @@
     "role": "Back-end Developer | Automation Solutions",
     "location": "Londrina, Brazil"
   },
+  "cookies": {
+    "title": "Cookies & Privacy",
+    "description": "This website uses cookies to enhance your experience. By continuing to use this site, you agree to our use of cookies.",
+    "learnMore": "Learn More",
+    "accept": "Accept"
+  },
   "nav": {
     "about": "About",
     "contact": "Contact",
@@ -76,5 +82,34 @@
     "select": "Select language",
     "en": "English",
     "pt": "Portuguese"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "cookies": {
+      "title": "Cookie Usage",
+      "description": "We use cookies to improve your browsing experience and analyze site traffic.",
+      "essential": "Essential cookies that enable basic functionality and security features",
+      "preferences": "Preference cookies that remember your language and theme choices"
+    },
+    "dataUsage": {
+      "title": "How We Use Your Data",
+      "description": "We collect and use your data in the following ways:",
+      "purposes": {
+        "theme": "To remember your preferred theme (light/dark mode)",
+        "language": "To save your language preference",
+        "contact": "To process contact form submissions"
+      }
+    },
+    "rights": {
+      "title": "Your Rights",
+      "description": "You have the following rights regarding your data:",
+      "access": "Right to access your personal data",
+      "delete": "Right to request deletion of your data",
+      "opt_out": "Right to opt-out of cookie usage (except essential cookies)"
+    },
+    "contact": {
+      "title": "Contact Information",
+      "description": "If you have any questions about our privacy policy or data practices, please contact us through our contact form."
+    }
   }
 }

@@ -3,6 +3,12 @@
     "role": "Analista e Desenvolvedor de Sistemas",
     "location": "Londrina, Brasil"
   },
+  "cookies": {
+    "title": "Cookies & Privacidade",
+    "description": "Este site usa cookies para melhorar sua experiência. Ao continuar navegando, você concorda com o uso de cookies.",
+    "learnMore": "Saiba Mais",
+    "accept": "Aceitar"
+  },
   "nav": {
     "about": "Sobre",
     "contact": "Contato",
@@ -76,5 +82,34 @@
     "select": "Selecionar idioma",
     "en": "Inglês",
     "pt": "Português"
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "cookies": {
+      "title": "Uso de Cookies",
+      "description": "Utilizamos cookies para melhorar sua experiência de navegação e analisar o tráfego do site.",
+      "essential": "Cookies essenciais que permitem funcionalidades básicas e recursos de segurança",
+      "preferences": "Cookies de preferência que lembram suas escolhas de idioma e tema"
+    },
+    "dataUsage": {
+      "title": "Como Usamos Seus Dados",
+      "description": "Coletamos e utilizamos seus dados das seguintes formas:",
+      "purposes": {
+        "theme": "Para lembrar sua preferência de tema (modo claro/escuro)",
+        "language": "Para salvar sua preferência de idioma",
+        "contact": "Para processar envios do formulário de contato"
+      }
+    },
+    "rights": {
+      "title": "Seus Direitos",
+      "description": "Você tem os seguintes direitos em relação aos seus dados:",
+      "access": "Direito de acessar seus dados pessoais",
+      "delete": "Direito de solicitar a exclusão de seus dados",
+      "opt_out": "Direito de recusar o uso de cookies (exceto cookies essenciais)"
+    },
+    "contact": {
+      "title": "Informações de Contato",
+      "description": "Se você tiver alguma dúvida sobre nossa política de privacidade ou práticas de dados, entre em contato conosco através do formulário de contato."
+    }
   }
 }

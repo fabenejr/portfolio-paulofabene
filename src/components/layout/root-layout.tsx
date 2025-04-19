@@ -6,6 +6,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuL
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { PageTransition } from "./page-transition"
+import { CookieConsent } from "../ui/cookie-consent"
 import { useEffect } from "react"
 
 const navVariants = {
@@ -90,6 +91,7 @@ export function RootLayout() {
           </div>
         </div>
       </footer>
+      <CookieConsent />
     </div>
   )
 }
