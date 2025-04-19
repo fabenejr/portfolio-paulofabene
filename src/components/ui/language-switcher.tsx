@@ -20,7 +20,11 @@ export function LanguageSwitcher() {
 
   const handleLanguageChange = (lang: string) => {
     i18n.changeLanguage(lang)
-    localStorage.setItem('i18nextLng', lang)
+    try {
+      localStorage.setItem('i18nextLng', lang)
+    } catch (error) {
+      console.warn('Failed to save language preference to localStorage:', error)
+    }
     // Force a reflow to ensure UI elements update correctly
     window.dispatchEvent(new Event('resize'))
   }

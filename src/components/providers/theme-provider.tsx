@@ -20,10 +20,17 @@ export function ThemeProvider({
   useEffect(() => {
     setMounted(true)
     // Handle initial theme
-    const savedTheme = localStorage.getItem(storageKey)
-    if (savedTheme) {
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark')
-    } else {
+    try {
+      const savedTheme = localStorage.getItem(storageKey)
+      if (savedTheme) {
+        document.documentElement.classList.toggle('dark', savedTheme === 'dark')
+      } else {
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        document.documentElement.classList.toggle('dark', systemDark)
+      }
+    } catch (error) {
+      console.warn('Failed to access localStorage:', error)
+      // Fallback to system preference
       const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
       document.documentElement.classList.toggle('dark', systemDark)
     }

@@ -13,9 +13,13 @@ export function ThemeToggle() {
   useEffect(() => {
     setMounted(true)
     // Apply theme from localStorage or system preference on mount
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme) {
-      setTheme(savedTheme)
+    try {
+      const savedTheme = localStorage.getItem('theme')
+      if (savedTheme) {
+        setTheme(savedTheme)
+      }
+    } catch (error) {
+      console.warn('Failed to access localStorage:', error)
     }
   }, [setTheme])
 
@@ -42,7 +46,11 @@ export function ThemeToggle() {
       onClick={() => {
         const newTheme = isLight ? "dark" : "light"
         setTheme(newTheme)
-        localStorage.setItem('theme', newTheme)
+        try {
+          localStorage.setItem('theme', newTheme)
+        } catch (error) {
+          console.warn('Failed to save theme to localStorage:', error)
+        }
       }}
       className="relative overflow-hidden w-10 h-10"
     >

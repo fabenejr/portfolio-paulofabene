@@ -2,13 +2,17 @@ import { Timeline } from "@/components/ui/timeline"
 import { motion } from "framer-motion"
 import { Ripple } from "@/components/magicui/ripple"
 import { useTranslation } from "react-i18next"
+import zenviaLogo from "@/assets/images/companies/zenvialogo.jpg"
+import movideskLogo from "@/assets/images/companies/movidesk_logo.jpeg"
+import omieLogo from "@/assets/images/companies/omie_logo.png"
+import londrisoftLogo from "@/assets/images/companies/londrisoft_logo.jpeg"
 
 const experiences = [
   {
     year: "2023 - Present",
     title: "Back-end Developer",
     company: "Zenvia",
-    logo: "/src/assets/images/companies/zenvialogo.jpg",
+    logo: zenviaLogo,
     iconBg: "#7A1FA2",
     description: "experience.items.zenvia.description",
     skills: ["Node.js", "AWS Lambda", "Chatbots", "API Integration", "JIRA", "Project Management", "Agile Methodologies"]
@@ -17,7 +21,7 @@ const experiences = [
     year: "2022 - 2023",
     title: "Customer Service Analyst",
     company: "Movidesk LTDA",
-    logo: "/src/assets/images/companies/movidesk_logo.jpeg",
+    logo: movideskLogo,
     iconBg: "#00A6CE",
     description: "experience.items.movidesk_analyst.description",
     skills: ["Technical Support", "API Testing", "Bug Analysis", "DevTools", "Javascript"]
@@ -26,7 +30,7 @@ const experiences = [
     year: "2022",
     title: "Implementation Success Manager",
     company: "Movidesk LTDA",
-    logo: "/src/assets/images/companies/movidesk_logo.jpeg",
+    logo: movideskLogo,
     iconBg: "#00A6CE",
     description: "experience.items.movidesk_manager.description",
     skills: ["Project Management", "Customer Success", "Helpdesk Implementation"]
@@ -35,7 +39,7 @@ const experiences = [
     year: "2021 - 2022",
     title: "Customer Success Analyst - Implementation",
     company: "Omiexperience LTDA",
-    logo: "/src/assets/images/companies/omie_logo.png",
+    logo: omieLogo,
     iconBg: "#00B98E",
     description: "experience.items.omiexperience.description",
     skills: ["ERP Systems", "Customer Success", "Implementation"]
@@ -44,7 +48,7 @@ const experiences = [
     year: "2019 - 2021",
     title: "Implementation Analyst",
     company: "Londrisoft Software Industry",
-    logo: "/src/assets/images/companies/londrisoft_logo.jpeg",
+    logo: londrisoftLogo,
     iconBg: "#143C8C",
     description: "experience.items.londrisoft_implementation.description",
     skills: ["System Implementation", "Training", "Requirements Analysis"]
@@ -53,7 +57,7 @@ const experiences = [
     year: "2018 - 2019",
     title: "Technical Support Analyst",
     company: "Londrisoft Software Industry",
-    logo: "/src/assets/images/companies/londrisoft_logo.jpeg",
+    logo: londrisoftLogo,
     iconBg: "#143C8C",
     description: "experience.items.londrisoft_support.description",
     skills: ["Technical Support", "SQL", "Hardware Configuration", "Firebird database"]
